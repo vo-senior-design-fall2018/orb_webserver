@@ -93,7 +93,8 @@ func uploadFileHandler() http.HandlerFunc {
 		}
 		conn, err := net.Dial("tcp", "localhost:5000")
 		if err != nil {
-			panic(err)
+			renderError(w, "TCP_SERVER_ERROR", http.StatusInternalServerError)
+			return
 		}
 		defer conn.Close()
 		log.Println("Connected to tcp server.")
